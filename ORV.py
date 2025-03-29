@@ -23,5 +23,27 @@ def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
     
 
 if __name__ == '__main__':
-    
+    #Pripravi kamero
+    kamera = cv.VideoCapture(0)
+    # Preverimo, če je kamera pravilno naložena
+    if not kamera.isOpened():
+        print('Kamera ni bila odprta.')
+    else:
+        while True:
+            # Preberemo sliko iz kamere
+            ret, slika = kamera.read()
+            slika=zmanjsaj_sliko(slika,260,300)
+           
+            cv.imshow('Kamera', cv.flip(slika,1))
+            key=cv.waitKey(1) & 0xFF
+            if key == ord('t'):
+               
+                break
+
+            # Če pritisnemo tipko 'q', zapremo okno
+            if key == ord('q'):
+                break
+        # Zapremo okno
+        kamera.release()
+        cv.destroyAllWindows()
     pass
