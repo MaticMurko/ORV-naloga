@@ -46,7 +46,7 @@ if __name__ == '__main__':
             cv.imshow('Kamera', cv.flip(slika,1))
             key=cv.waitKey(1) & 0xFF
             if key == ord('t'):
-               
+                spodnja_meja, zgornja_meja = doloci_barvo_koze(slika, (120, 100), (150, 120))
                 break
 
             # Če pritisnemo tipko 'q', zapremo okno
