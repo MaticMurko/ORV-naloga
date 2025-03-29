@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+import time as time
 
 def zmanjsaj_sliko(slika, sirina, visina):
     return    cv.resize(slika, (sirina, visina))
@@ -64,4 +65,29 @@ if __name__ == '__main__':
         # Zapremo okno
         kamera.release()
         cv.destroyAllWindows()
+
+    kamera = cv.VideoCapture(0)
+    if not kamera.isOpened():
+        print('Kamera ni bila odprta.')
+    else:
+        last_time = time.time()  # začeten cas
+        fps=0
+        while True:
+            if cv.waitKey(1) & 0xFF == ord('q'):
+                    break
+            ret, slika = kamera.read()
+            slika=zmanjsaj_sliko(slika,260,300)
+
+            polje=obdelaj_sliko_s_skatlami(slika,13,15,(spodnja_meja,zgornja_meja))
+
+            current_time = time.time()
+            fps =1/(current_time-last_time)
+            last_time = current_time 
+ 
+
+            slika=cv.flip(slika,1)
+            cv.putText(slika, f"FPS: {int(fps)}", (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1)
+            cv.imshow('Kamera',slika)
+        kamera.release()
+        cv.destroyAllWindows()  
     pass
