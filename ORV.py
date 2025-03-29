@@ -90,6 +90,7 @@ if __name__ == '__main__':
             slika=zmanjsaj_sliko(slika,260,300)
 
             polje=obdelaj_sliko_s_skatlami(slika,13,15,(spodnja_meja,zgornja_meja))
+            nariši_kvadratke_na_sliko(slika, polje, 13, 15)
 
             current_time = time.time()
             fps =1/(current_time-last_time)
