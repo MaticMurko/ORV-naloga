@@ -18,8 +18,17 @@ def prestej_piklse_z_barvo_koze(slika, barva_koze) -> int:
     pass
 
 def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
+    x1, y1 = levo_zgoraj
+    x2, y2 = desno_spodaj
+    kva = slika[y1:y2, x1:x2]
 
-    pass
+    mean_color = np.mean(kva, axis=(0, 1))  #izačuna povprečje za vse barvne kanale posebaj 
+    std_color = np.std(kva, axis=(0, 1)) #izračuna standarni odklon za vse barvne kanale posebaj
+    
+    spodnja_meja = np.maximum(mean_color - std_color, 0).astype(np.uint8)
+    zgornja_meja = np.minimum(mean_color + std_color, 255).astype(np.uint8)
+
+    return spodnja_meja, zgornja_meja
     
 
 if __name__ == '__main__':
@@ -37,7 +46,7 @@ if __name__ == '__main__':
             cv.imshow('Kamera', cv.flip(slika,1))
             key=cv.waitKey(1) & 0xFF
             if key == ord('t'):
-               
+                spodnja_meja, zgornja_meja = doloci_barvo_koze(slika, (120, 100), (150, 120))
                 break
 
             # Če pritisnemo tipko 'q', zapremo okno
