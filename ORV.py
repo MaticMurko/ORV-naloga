@@ -18,7 +18,9 @@ def prestej_piklse_z_barvo_koze(slika, barva_koze) -> int:
     pass
 
 def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
-
+    x1, y1 = levo_zgoraj
+    x2, y2 = desno_spodaj
+    kva = slika[y1:y2, x1:x2]
     pass
     
 
