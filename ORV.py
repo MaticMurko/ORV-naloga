@@ -13,6 +13,10 @@ def obdelaj_sliko_s_skatlami(slika, sirina_skatle, visina_skatle, barva_koze) ->
         vrstica = []
         x=0
         while x<width:
+            skatla = slika[y:y+visina_skatle, x:x+sirina_skatle]
+            x+=sirina_skatle
+        rezultat.append(vrstica)
+        y+=visina_skatle
 
 def prestej_piklse_z_barvo_koze(slika, barva_koze) -> int:
     '''Prestej število pikslov z barvo kože v škatli.'''
