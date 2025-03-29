@@ -39,6 +39,8 @@ def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
     zgornja_meja = np.minimum(mean_color + std_color, 255).astype(np.uint8)
 
     return spodnja_meja, zgornja_meja
+
+def nariši_kvadratke_na_sliko(slika, polje, sirina_skatle, visina_skatle):
     
 
 if __name__ == '__main__':
