@@ -22,6 +22,9 @@ def obdelaj_sliko_s_skatlami(slika, sirina_skatle, visina_skatle, barva_koze) ->
 
 def prestej_piklse_z_barvo_koze(slika, barva_koze) -> int:
     spodnja_meja, zgornja_meja =barva_koze
+    range=cv.inRange(slika,spodnja_meja,zgornja_meja) 
+    koza=cv.countNonZero(range)
+    return koza
 
 def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
     x1, y1 = levo_zgoraj
