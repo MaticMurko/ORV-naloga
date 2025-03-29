@@ -33,7 +33,7 @@ if __name__ == '__main__':
             # Preberemo sliko iz kamere
             ret, slika = kamera.read()
             slika=zmanjsaj_sliko(slika,260,300)
-           
+            cv.rectangle(slika, (120,100), (150,120), (0,255,0), 1)
             cv.imshow('Kamera', cv.flip(slika,1))
             key=cv.waitKey(1) & 0xFF
             if key == ord('t'):
