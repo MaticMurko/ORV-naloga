@@ -39,7 +39,18 @@ def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
     zgornja_meja = np.minimum(mean_color + std_color, 255).astype(np.uint8)
 
     return spodnja_meja, zgornja_meja
-    
+
+def nariši_kvadratke_na_sliko(slika, polje, sirina_skatle, visina_skatle):
+    y = 0
+    for row in range(len(polje)):
+        x = 0
+        for col in range(len(polje[row])):
+            if polje[row][col] > sirina_skatle*visina_skatle*0.30: #preveri če v škatli večkot 30% pikslov barve koze
+                top_left = (x, y)
+                bottom_right = (x + sirina_skatle, y + visina_skatle)
+                cv.rectangle(slika, top_left, bottom_right, (0, 255, 0), 1)
+            x += sirina_skatle
+        y += visina_skatle
 
 if __name__ == '__main__':
     #Pripravi kamero
@@ -79,6 +90,7 @@ if __name__ == '__main__':
             slika=zmanjsaj_sliko(slika,260,300)
 
             polje=obdelaj_sliko_s_skatlami(slika,13,15,(spodnja_meja,zgornja_meja))
+            nariši_kvadratke_na_sliko(slika, polje, 13, 15)
 
             current_time = time.time()
             fps =1/(current_time-last_time)
