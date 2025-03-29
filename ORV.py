@@ -24,7 +24,11 @@ def doloci_barvo_koze(slika,levo_zgoraj,desno_spodaj) -> tuple:
 
     mean_color = np.mean(kva, axis=(0, 1))  #izačuna povprečje za vse barvne kanale posebaj 
     std_color = np.std(kva, axis=(0, 1)) #izračuna standarni odklon za vse barvne kanale posebaj
-    pass
+    
+    spodnja_meja = np.maximum(mean_color - std_color, 0).astype(np.uint8)
+    zgornja_meja = np.minimum(mean_color + std_color, 255).astype(np.uint8)
+
+    return spodnja_meja, zgornja_meja
     
 
 if __name__ == '__main__':
